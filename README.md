@@ -35,9 +35,9 @@ OAuth Token for sr.ht
 ```
 - uses: athorp96/sourcehut_issue_mirror@master
   with:
-    title: ${{ github.event.issue.user.title}
-    body: ${{ github.event.issue.user.body}}
-    submitter: ${{ github.event.issue.user.user.login }}
+    title: ${{ github.event.issue.title}
+    body: ${{ github.event.issue.body}}
+    submitter: ${{ github.event.issue.user.login }}
     tracker-owner: "~your-sr.ht-username"
     tracker-name: "my-app-tracker"
     oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
