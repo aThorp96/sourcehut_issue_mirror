@@ -7,21 +7,27 @@ Its inteded use is to mirror new issues from github to sourcehut.
 
 
 ### `title`
+
     Title of the issue
     
 ### `body`
+
     Body of the issue
 
 ### `submitter`
+
     Username of the submitter
     
 ### `tracker-owner`
+
     Account name of the trakcer owner. *Must be proceeded with "~"*
     
 ### `tracker-name`
+
     Name of the tracker
     
 ### `oauth-token`
+
     OAuth Token for sr.ht
 
 ## Example usage
