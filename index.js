@@ -3,7 +3,16 @@ const github = require('@actions/github');
 var request = require('request');
 
 try {
+    /**
     const title = core.getInput('title');
+    const body = core.getInput('body');
+    const submitter = core.getInput('submitter');
+    const tracker_owner = core.getInput('tracker-owner');
+    const tracker_name = core.getInput('tracker-name');
+    const oauth_token = core.getInput('oauth-token');
+    **/
+
+    const title = "Testing from JS";
     const body = core.getInput('body');
     const submitter = core.getInput('submitter');
     const tracker_owner = core.getInput('tracker-owner');
@@ -31,11 +40,14 @@ try {
         		console.error(error)
         		return
     		}
-    		console.log(`statusCode: ${res.statusCode}`)
 
+    		console.log(`statusCode: ${res.statusCode}`)
     		if (res.statusCode != 201) {
             	core.setFailed(`Failed to post: ${body}`);
+            	return
     		}
+    		console.log("Successfully opened issue")
+
         }
     )
 
