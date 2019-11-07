@@ -4,14 +4,14 @@ var request = require('request');
 
 try {
     const title = core.getInput('title');
-    const description = core.getInput('body');
+    const body = core.getInput('body');
     const submitter = core.getInput('submitter');
     const tracker_owner = core.getInput('tracker-owner');
     const tracker_name = core.getInput('tracker-name');
     const oauth_token = core.getInput('oauth-token');
 
 	uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
-	description = `Issue mirrored from github.\nOpened by [${submitter}](https://github.com/${submitter}).\n\n${description}`
+	var description = `Issue mirrored from github.\nOpened by [${submitter}](https://github.com/${submitter}).\n\n${body}`
 
 	request(
 		{
