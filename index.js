@@ -20,7 +20,7 @@ try {
     const oauth_token = core.getInput('oauth-token');
 
 	uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
-	var description = `Issue mirrored from github.\nOpened by [${submitter}](https://github.com/${submitter}).\n\n${body}`
+	var description = `Issue mirrored from github.\n\nOpened by [${submitter}](https://github.com/${submitter}).\n\n${body}`
 
 	request(
 		{
