@@ -33,18 +33,13 @@ OAuth Token for sr.ht
 ## Example usage
 
 ```
-uses: athorp96/sourcehut_issue_mirror@master
-with:
-	title: ${{ github.event.issue.user.title}}
-	
-	body: ${{ github.event.issue.user.body}}
-	
-	submitter: ${{ github.event.issue.user.user.login }}
-	
-	tracker-owner: "~your-sr.ht-username"
-	
-	tracker-name: "my-app-tracker"
-	
-	oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
+- uses: athorp96/sourcehut_issue_mirror@master
+  with:
+    title: ${{ github.event.issue.user.title}
+    body: ${{ github.event.issue.user.body}}
+    submitter: ${{ github.event.issue.user.user.login }}
+    tracker-owner: "~your-sr.ht-username"
+    tracker-name: "my-app-tracker"
+    oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
 ```
 	
