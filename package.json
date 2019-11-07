@@ -1,0 +1,25 @@
+{
+  "name": "sourcehut_issue_mirror",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aThorp96/sourcehut_issue_mirror.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aThorp96/sourcehut_issue_mirror/issues"
+  },
+  "homepage": "https://github.com/aThorp96/sourcehut_issue_mirror#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@actions/github": "^1.1.0",
+    "request": "^2.88.0"
+  }
+}

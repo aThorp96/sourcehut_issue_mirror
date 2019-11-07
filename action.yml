@@ -1,0 +1,26 @@
+name: 'SourceHut Issue Maker'
+description: 'Create a sr.ht issue'
+inputs:
+  title:
+    description: 'Title of the issue'
+    required: true
+    default: 'Title not provided'
+  body:
+    description: 'Body of the issue'
+    required: true
+    default: 'No issue body'
+  submitter:
+    description: 'Username of issue submitter'
+    required: true
+  tracker-owner:
+    description: 'Account name of the trakcer owner. *Must be proceeded with "~"*'
+    required: true
+  tracker-name:
+    description: 'Name of the tracker'
+    required: true
+  oauth-token:
+    description: 'OAuth Token for sr.ht'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
