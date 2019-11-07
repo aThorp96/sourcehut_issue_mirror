@@ -8,27 +8,27 @@ Its inteded use is to mirror new issues from github to sourcehut.
 
 ### `title`
 
-    Title of the issue
+Title of the issue
     
 ### `body`
 
-    Body of the issue
+Body of the issue
 
 ### `submitter`
 
-    Username of the submitter
+Username of the submitter
     
 ### `tracker-owner`
 
-    Account name of the trakcer owner. *Must be proceeded with "~"*
+Account name of the trakcer owner. *Must be proceeded with "~"*
     
 ### `tracker-name`
 
-    Name of the tracker
+Name of the tracker
     
 ### `oauth-token`
 
-    OAuth Token for sr.ht
+OAuth Token for sr.ht
 
 ## Example usage
 
