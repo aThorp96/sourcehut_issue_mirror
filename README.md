@@ -20,7 +20,7 @@ Username of the submitter
     
 ### `tracker-owner`
 
-Account name of the trakcer owner. *Must be proceeded with "~"*
+Account name of the tracker owner. *Must be proceeded with "~"*
     
 ### `tracker-name`
 
