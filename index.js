@@ -31,8 +31,11 @@ try {
         		console.error(error)
         		return
     		}
-    		console.log(body)
     		console.log(`statusCode: ${res.statusCode}`)
+
+    		if (res.statusCode != 201) {
+            	core.setFailed(`Failed to post: ${body}`);
+    		}
         }
     )
 
