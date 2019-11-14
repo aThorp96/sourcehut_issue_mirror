@@ -32,7 +32,7 @@ OAuth Token for sr.ht
 
 ## Example usage
 
-```
+```yml
 - uses: athorp96/sourcehut_issue_mirror@master
   with:
     title: ${{ github.event.issue.title}
