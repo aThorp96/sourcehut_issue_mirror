@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: athorp96/sourcehut_issue_mirror@master
+    - uses: athorp96/sourcehut_issue_mirror@foreign_username
       with:
         title: ${{ github.event.issue.title }}
         body: ${{ github.event.issue.body }}
