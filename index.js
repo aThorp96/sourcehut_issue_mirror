@@ -6,12 +6,13 @@ try {
     const title = core.getInput('title');
     const body = core.getInput('body');
     const submitter = core.getInput('submitter');
+    const submitter_url = `https://github.com/${submitter}`
     const tracker_owner = core.getInput('tracker-owner');
     const tracker_name = core.getInput('tracker-name');
     const oauth_token = core.getInput('oauth-token');
 
 	uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
-	var description = `Issue mirrored from github.\n\nOpened by [${submitter}](https://github.com/${submitter}).\n\n${body}`
+	var description = `Issue mirrored from github.\n\nOpened by [${submitter}](${sumbitter_url}).\n\n${body}`
 
 	request(
 		{
@@ -23,7 +24,9 @@ try {
     		},
 			body: JSON.stringify({
         		'title': title,
-        		'description': description
+        		'description': description,
+        		'external_id': submitter,
+        		'external_url': submitter_url
     		})
 		},
 		(error, res, body) => {
