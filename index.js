@@ -6,6 +6,7 @@ try {
     const title = core.getInput('title');
     const body = core.getInput('body');
     const submitter = core.getInput('submitter');
+    const submitter_id = `github.com:${submitter}`
     const submitter_url = `https://github.com/${submitter}`
     const tracker_owner = core.getInput('tracker-owner');
     const tracker_name = core.getInput('tracker-name');
@@ -25,7 +26,7 @@ try {
 			body: JSON.stringify({
         		'title': title,
         		'description': description,
-        		'external_id': submitter,
+        		'external_id': submitter_id,
         		'external_url': submitter_url
     		})
 		},
