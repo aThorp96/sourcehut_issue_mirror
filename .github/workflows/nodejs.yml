@@ -5,8 +5,8 @@ on:
     types: [opened]
 
 jobs:
-    mirror:
-    runs-on: ubuntu-latest
+  mirror:
+    runs-on: [ubuntu-latest]
     steps:
     - uses: athorp96/sourcehut_issue_mirror@master
       with:
@@ -17,8 +17,8 @@ jobs:
         tracker-name: "sourcehut-issue-mirror-github-action"
         oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
 
-    label_mirrored:
-    runs-on: ubuntu-latest
+  label_mirrored:
+    runs-on: [ubuntu-latest]
     steps:
     - uses: Naturalclar/issue-action@v1.0.0
       with:
@@ -26,7 +26,7 @@ jobs:
         keywords: '["${{ github.event.issue.body }}"]' # Try and use body as keyword
         labels: '["mirrored"]'
         
-    auto-response:
+  auto-response:
     runs-on: ubuntu-latest
     steps:
     - uses: derekprior/add-autoresponse@master
@@ -38,7 +38,7 @@ jobs:
         author: ${{ github.event.issue.user.login }}
 
         
-    close-issue:
+  close-issue:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
