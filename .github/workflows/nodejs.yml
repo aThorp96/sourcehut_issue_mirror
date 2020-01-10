@@ -24,7 +24,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         keywords: '["${{ github.event.issue.body }}"]' # Try and use body as keyword
-        labels: '["mirrored"]'
+        labels: '["mirrored","ready-to-close"]'
         
   auto-response:
     runs-on: ubuntu-latest
@@ -45,5 +45,5 @@ jobs:
     - name: issue-closure
       uses: bdougie/close-issues-based-on-label@master
       env:
-        LABEL: mirrored
+        LABEL: ready-to-close
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
