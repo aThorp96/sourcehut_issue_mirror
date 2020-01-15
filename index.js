@@ -65,7 +65,7 @@ function create_issue(uri, oauth_token, title, description, submitter_id, submit
 }
 
 function annotate_ticket(uri, id, oauth_token, repo) {
-	console.log(`${uri}/${id}`)
+	console.log(`Adding label ${repo} to ${uri}/${id}`)
 	request(
 		{
 			method: 'PUT',
