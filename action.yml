@@ -21,6 +21,9 @@ inputs:
   oauth-token:
     description: 'OAuth Token for sr.ht'
     required: true
+  label:
+    description: 'Label to put on mirrored issue *must be declared in tracker*'
+    required: true
 runs:
   using: 'node12'
   main: 'index.js'
