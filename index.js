@@ -11,7 +11,8 @@ try {
 	const tracker_owner = core.getInput('tracker-owner');
 	const tracker_name = core.getInput('tracker-name');
 	const oauth_token = core.getInput('oauth-token');
-	var repo_name = core.getInput('title').split("/");
+	var repository = core.getInput('title');
+	var repo_name = repository.split("/");
 
 	// If the repo name was provided from the ENV variable,
 	// it will be in the format OWNER/REPO
@@ -22,7 +23,7 @@ try {
   	}
 
 	var uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
-	var description = `Issue mirrored from github.\n\nOpened by [${submitter}](${submitter_url}).\n\n${body}`;
+	var description = `Issue mirrored from [github](https://github.com/${repository}).\n\nOpened by [${submitter}](${submitter_url}).\n\n${body}`;
 
 	create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name)
 
