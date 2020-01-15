@@ -30,6 +30,10 @@ Name of the tracker
 
 OAuth Token for sr.ht
 
+### `repo`
+
+Label for mirrored ticket
+
 ## Example usage
 
 ```yml

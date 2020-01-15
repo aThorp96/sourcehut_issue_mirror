@@ -11,7 +11,7 @@ try {
 	const tracker_owner = core.getInput('tracker-owner');
 	const tracker_name = core.getInput('tracker-name');
 	const oauth_token = core.getInput('oauth-token');
-	var repository = core.getInput('repo');
+	var repository = core.getInput('label');
 	var repo_name = repository.split("/");
 
 	// If the repo name was provided from the ENV variable,
