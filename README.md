@@ -30,6 +30,10 @@ Name of the tracker
 
 OAuth Token for sr.ht
 
+### `repo`
+
+Label for mirrored ticket
+
 ## Example usage
 
 ```yml
@@ -41,5 +45,6 @@ OAuth Token for sr.ht
     tracker-owner: "~your-sr.ht-username"
     tracker-name: "my-app-tracker"
     oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
+    label: ${{ github.event.repository.name }}
 ```
 	
