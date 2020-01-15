@@ -45,5 +45,6 @@ Label for mirrored ticket
     tracker-owner: "~your-sr.ht-username"
     tracker-name: "my-app-tracker"
     oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
+    label: ${{ github.event.repository.name }}
 ```
 	
