@@ -8,7 +8,7 @@ jobs:
   mirror:
     runs-on: [ubuntu-latest]
     steps:
-    - uses: athorp96/sourcehut_issue_mirror@include_repo_name 
+    - uses: athorp96/sourcehut_issue_mirror@master
       with:
         title: ${{ github.event.issue.title }}
         body: ${{ github.event.issue.body }}
