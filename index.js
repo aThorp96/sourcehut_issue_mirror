@@ -49,13 +49,15 @@ function create_issue(uri, oauth_token, title, description, submitter_id, submit
 		},
 		(error, res, body) => {
 			if (error) {
-			console.error(error)
+				console.error(error)
+				return
 			}
 			console.log(JSON.parse(res.body).id)
 			ticket_id = JSON.parse(res.body).id
 
-			if (res.statusCode != 200) {
-		core.setFailed(`Failed to post: ${res}`);
+			if (res.statusCode != 201) {
+				core.setFailed(`Failed to post: ${res.body}`);
+				return
 			}
 			console.log("Successfully opened issue")
 			annotate_ticket(uri, ticket_id, oauth_token, repo)
@@ -80,13 +82,13 @@ function annotate_ticket(uri, id, oauth_token, repo) {
 		},
 		(error, res, body) => {
 			if (error) {
-			console.error(error)
-			return
+				console.error(error)
+				return
 			}
 			console.log(`Status Code: ${res.statusCode}`)
-			if (res.statusCode != 201) {
-		core.setFailed(`Failed to update issue: ${body}`);
-		return
+			if (res.statusCode != 200) {
+				core.setFailed(`Failed to update issue: ${body}`);
+				return
 			}
 			console.log("Successfully labeled issue")
 	}
