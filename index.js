@@ -22,6 +22,11 @@ try {
   		repo_name = repo_name[0];
   	}
 
+	// If the repository was not provided, error
+  	if (repo_name == "") {
+      	throw "Repository not passed in as label: \"${repository}\""
+  	}
+
 	var uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
 	var description = `Issue mirrored from [github](https://github.com/${repository}).\n\nOpened by [${submitter}](${submitter_url}).\n\n${body}`;
 
