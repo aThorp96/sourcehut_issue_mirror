@@ -20,13 +20,14 @@ jobs:
 
   label_mirrored:
     runs-on: [ubuntu-latest]
+    needs: mirror
     steps:
     - uses: Naturalclar/issue-action@v1.0.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         keywords: '["${{ github.event.issue.body }}"]' # Try and use body as keyword
         labels: '["mirrored","ready-to-close"]'
-        
+
   auto-response:
     runs-on: ubuntu-latest
     steps:
@@ -35,12 +36,24 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         respondableId: ${{ github.event.issue.node_id }}
-        response: "Hello! Thank you for your interest in my project.\nObviously the project has to be hosted on Github, but our issue tracking is done using sourcehut.\nThis issue has been mirrored on sourcehut using this very github action (big surprise there, right?). Feel free to check it out [here!](https://todo.sr.ht/~athorp96/sourcehut-issue-mirror-github-action)\nThanks!"
+        response: "Hello! Thank you for your interest in my project.\nObviously the project has to be hosted on Github for it to work as an action, but our issue tracking is done using sourcehut.\n(big surprise there, right?). Feel free to check it out [here!](https://todo.sr.ht/~athorp96/sourcehut-issue-mirror-github-action)\nThanks!"
         author: ${{ github.event.issue.user.login }}
 
-        
+  auto-response-mirrored-confirmatioon:
+    runs-on: ubuntu-latest
+    needs: [mirror, auto-response]
+    steps:
+    - uses: derekprior/add-autoresponse@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        respondableId: ${{ github.event.issue.node_id }}
+        response: "This issue has been mirrored on sourcehut and will be closed here on Github"
+        author: ${{ github.event.issue.user.login }}
+
   close-issue:
     runs-on: ubuntu-latest
+    needs: mirror
     steps:
     - uses: actions/checkout@master
     - name: issue-closure

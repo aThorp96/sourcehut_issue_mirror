@@ -1,6 +1,6 @@
- core = require('@actions/core');
+core = require('@actions/core');
 const github = require('@actions/github');
-var request = require('request');
+const xhr = new XMLHttpRequest();
 
 try {
 	const title = core.getInput('title');
@@ -37,65 +37,57 @@ try {
 }
 
 function create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo) {
-	return request(
-		{
-			method: 'POST',
-			url: uri,
-			headers: {
-			'Authorization': `token ${oauth_token}`,
-			'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-			'title': title,
-			'description': description,
-			'external_id': submitter_id,
-			'external_url': submitter_url
-			})
+	const res = fetch(uri, {
+		method: 'POST',
+		headers: {
+    		'Authorization': `token ${oauth_token}`,
+    		'Content-Type': 'application/json'
 		},
-		(error, res, body) => {
-			if (error) {
-				console.error(error)
-				return
-			}
-			console.log(JSON.parse(res.body).id)
-			ticket_id = JSON.parse(res.body).id
+		body: JSON.stringify({
+    		'title': title,
+    		'description': description,
+    		'external_id': submitter_id,
+    		'external_url': submitter_url
+		})
+	});
 
-			if (res.statusCode != 201) {
-				core.setFailed(`Failed to post: ${res.body}`);
-				return
-			}
-			console.log("Successfully opened issue")
-			annotate_ticket(uri, ticket_id, oauth_token, repo)
+	if (!res.ok) {
+		console.error(error)
+		return
 	}
-	)
+
+	console.log(JSON.parse(res.body).id)
+	ticket_id = JSON.parse(res.body).id
+
+	if (res.statusCode != 201) {
+		core.setFailed(`Failed to post: ${res.body}`);
+		return
+	}
+	console.log("Successfully opened issue")
+	annotate_ticket(uri, ticket_id, oauth_token, repo)
 
 }
 
 function annotate_ticket(uri, id, oauth_token, repo) {
 	console.log(`Adding label ${repo} to ${uri}/${id}`)
-	request(
-		{
+	const res = await fetch(`${uri}/${id}`, {
 			method: 'PUT',
-			url: `${uri}/${id}`,
 			headers: {
-			'Authorization': `token ${oauth_token}`,
-			'Content-Type': 'application/json'
+    			'Authorization': `token ${oauth_token}`,
+    			'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 			'labels': [repo]
 			}),
-		},
-		(error, res, body) => {
-			if (error) {
-				console.error(error)
-				return
-			}
-			console.log(`Status Code: ${res.statusCode}`)
-			if (res.statusCode != 200) {
-				core.setFailed(`Failed to update issue: ${body}`);
-				return
-			}
-			console.log("Successfully labeled issue")
+		});
+
+		console.log(`Status Code: ${res.statusCode}`)
+    	if (res.statusCode != 200) {
+    		core.setFailed(`Failed to label ticket: ${res.body}`);
+    		return
+    	}
+
+		console.log("Successfully labeled issue")
 	}
 	)
 }
