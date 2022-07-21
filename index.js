@@ -30,14 +30,14 @@ try {
     var uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
     var description = `Issue mirrored from [github](https://github.com/${repository}).\n\nOpened by [${submitter}](${submitter_url}).\n\n${body}`;
 
-    create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name)
+    await create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name)
 
 } catch (error) {
     core.setFailed(error.message);
 }
 
-function create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo) {
-    const res = fetch(uri, {
+async function create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo) {
+    const res = await fetch(uri, {
     method: 'POST',
     headers: {
         'Authorization': `token ${oauth_token}`,
@@ -69,7 +69,7 @@ function create_issue(uri, oauth_token, title, description, submitter_id, submit
 
 }
 
-function annotate_ticket(uri, id, oauth_token, repo) {
+async function annotate_ticket(uri, id, oauth_token, repo) {
     console.log(`Adding label ${repo} to ${uri}/${id}`)
     const res = await fetch(`${uri}/${id}`, {
     method: 'PUT',
