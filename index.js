@@ -70,14 +70,14 @@ async function create_issue(uri, oauth_token, title, description, submitter_id, 
 async function annotate_ticket(uri, id, oauth_token, repo) {
     console.log(`Adding label ${repo} to ${uri}/${id}`)
     const res = await fetch(`${uri}/${id}`, {
-    method: 'PUT',
-    headers: {
-        'Authorization': `token ${oauth_token}`,
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-    'labels': [repo]
-    }),
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${oauth_token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        'labels': [repo]
+        }),
     });
 
     console.log(`Status Code: ${res.statusCode}`)
@@ -87,8 +87,6 @@ async function annotate_ticket(uri, id, oauth_token, repo) {
         }
 
     console.log("Successfully labeled issue")
-    }
-    )
 }
 
 
