@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+const nf = 'node-fetch';
 const core = require('@actions/core');
 const github = require('@actions/github');
 
@@ -36,7 +36,7 @@ var description = `Issue mirrored from [github](https://github.com/${repository}
 create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name).catch((e) => {core.setFailed(e.message)});
 
 async function create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo) {
-    const res = await fetch(uri, {
+    const res = await nf.fetch(uri, {
     method: 'POST',
     headers: {
         'Authorization': `token ${oauth_token}`,
@@ -70,7 +70,7 @@ async function create_issue(uri, oauth_token, title, description, submitter_id, 
 
 async function annotate_ticket(uri, id, oauth_token, repo) {
     console.log(`Adding label ${repo} to ${uri}/${id}`)
-    const res = await fetch(`${uri}/${id}`, {
+    const res = await nf.fetch(`${uri}/${id}`, {
         method: 'PUT',
         headers: {
             'Authorization': `token ${oauth_token}`,
