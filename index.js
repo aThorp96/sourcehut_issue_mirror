@@ -2,39 +2,38 @@ core = require('@actions/core');
 const github = require('@actions/github');
 const xhr = new XMLHttpRequest();
 
-try {
-    const title = core.getInput('title');
-    const body = core.getInput('body');
-    const submitter = core.getInput('submitter');
-    const submitter_id = `github.com:${submitter}`
-    const submitter_url = `https://github.com/${submitter}`
-    const tracker_owner = core.getInput('tracker-owner');
-    const tracker_name = core.getInput('tracker-name');
-    const oauth_token = core.getInput('oauth-token');
-    var repository = core.getInput('label');
-    var repo_name = repository.split("/");
+// Get input
+const title = core.getInput('title');
+const body = core.getInput('body');
+const submitter = core.getInput('submitter');
+const submitter_id = `github.com:${submitter}`
+const submitter_url = `https://github.com/${submitter}`
+const tracker_owner = core.getInput('tracker-owner');
+const tracker_name = core.getInput('tracker-name');
+const oauth_token = core.getInput('oauth-token');
+var repository = core.getInput('label');
+var repo_name = repository.split("/");
 
-    // If the repo name was provided from the ENV variable,
-    // it will be in the format OWNER/REPO
-    if (repo_name.length > 1) {
-        repo_name = repo_name[1];
-    } else {
-        repo_name = repo_name[0];
-    }
+// Validate Input
 
-    // If the repository was not provided, error
-    if (repo_name == "") {
-    	throw "Repository not passed in as label: \"${repository}\""
-    }
-
-    var uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
-    var description = `Issue mirrored from [github](https://github.com/${repository}).\n\nOpened by [${submitter}](${submitter_url}).\n\n${body}`;
-
-    await create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name)
-
-} catch (error) {
-    core.setFailed(error.message);
+// If the repo name was provided from the ENV variable,
+// it will be in the format OWNER/REPO
+if (repo_name.length > 1) {
+    repo_name = repo_name[1];
+} else {
+    repo_name = repo_name[0];
 }
+
+// If the repository was not provided, error
+if (repo_name == "") {
+	throw "Repository not passed in as label: \"${repository}\""
+}
+
+var uri = `https://todo.sr.ht/api/user/${tracker_owner}/trackers/${tracker_name}/tickets`;
+var description = `Issue mirrored from [github](https://github.com/${repository}).\n\nOpened by [${submitter}](${submitter_url}).\n---\n${body}`;
+
+// Push to Sourcehut
+create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo_name).catch((e) => core.setFailed(e.message);
 
 async function create_issue(uri, oauth_token, title, description, submitter_id, submitter_url, repo) {
     const res = await fetch(uri, {
