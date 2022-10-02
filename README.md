@@ -9,7 +9,7 @@ Its inteded use is to mirror new issues from github to sourcehut.
 ### `title`
 
 Title of the issue
-    
+
 ### `body`
 
 Body of the issue
@@ -17,15 +17,15 @@ Body of the issue
 ### `submitter`
 
 Username of the submitter
-    
+
 ### `tracker-owner`
 
 Account name of the tracker owner. *Must be proceeded with "~"*
-    
+
 ### `tracker-name`
 
 Name of the tracker
-    
+
 ### `oauth-token`
 
 OAuth Token for sr.ht
@@ -47,4 +47,4 @@ Label for mirrored ticket
     oauth-token: ${{ secrets.SRHT_OAUTH_TOKEN }}
     label: ${{ github.event.repository.name }}
 ```
-	
+
